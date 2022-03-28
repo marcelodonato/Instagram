@@ -9,22 +9,24 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.common.view.CustomDialog
+import com.marcelodonato.instagram.databinding.FragmentRegisterPhotoBinding
 
-class RegisterPhotoFragment : Fragment() {
+class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_register_photo, container, false)
+    private var binding: FragmentRegisterPhotoBinding? = null
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val customDialog = CustomDialog(requireContext())
+        binding = FragmentRegisterPhotoBinding.bind(view)
 
+
+        val customDialog = CustomDialog(requireContext())
 
         customDialog.addButton(R.string.photo, R.string.gallery) {
             when (it.id) {
