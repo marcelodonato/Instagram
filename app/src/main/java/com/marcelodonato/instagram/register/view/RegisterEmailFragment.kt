@@ -6,10 +6,59 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marcelodonato.instagram.R
+import com.marcelodonato.instagram.common.util.TxtWatcher
+import com.marcelodonato.instagram.databinding.FragmentRegisterEmailBinding
+import com.marcelodonato.instagram.register.RegisterEmail
 
-class RegisterEmailFragment : Fragment()  {
+class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), RegisterEmail.View {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_register_email, container, false )
+    private var binding: FragmentRegisterEmailBinding? = null
+    override lateinit var presenter: RegisterEmail.Presenter
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentRegisterEmailBinding.bind(view)
+
+        binding?.let {
+            with(it) {
+                registerTxtLogin.setOnClickListener {
+                    activity?.finish()
+                }
+
+                registerBtnNext.setOnClickListener {
+                    presenter.create(
+                        registerEditEmail.text.toString()
+                    )
+                }
+
+                registerEditEmail.addTextChangedListener(watcher)
+                registerEditEmail.addTextChangedListener(TxtWatcher {
+                    displayEmailFailure(null)
+                })
+
+
+            }
+        }
+
+
     }
+
+
+    override fun onDestroy() {
+        binding = null
+        // presenter.onDestroy()
+        super.onDestroy()
+    }
+
+    private val watcher = TxtWatcher {
+        binding?.registerBtnNext?.isEnabled =
+            binding?.registerEditEmail?.text.toString().isNotEmpty()
+    }
+
+    override fun displayEmailFailure(emailError: Int?) {
+
+    }
+
 }

@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.marcelodonato.instagram.R
+import com.marcelodonato.instagram.common.base.DependencyInjector
 import com.marcelodonato.instagram.common.util.TxtWatcher
 import com.marcelodonato.instagram.databinding.ActivityLoginBinding
 import com.marcelodonato.instagram.login.Login
@@ -18,6 +19,7 @@ import com.marcelodonato.instagram.login.data.FakeDataSource
 import com.marcelodonato.instagram.login.data.LoginRepository
 import com.marcelodonato.instagram.login.presentation.LoginPresenter
 import com.marcelodonato.instagram.main.view.MainActivity
+import com.marcelodonato.instagram.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
@@ -26,14 +28,11 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        val repository = LoginRepository(FakeDataSource())
 
-        presenter = LoginPresenter(this, repository)
+        presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
         with(binding) {
             loginEditEmail.addTextChangedListener(watcher)
@@ -48,7 +47,9 @@ class LoginActivity : AppCompatActivity(), Login.View {
             loginBtnEnter.setOnClickListener {
                 presenter.login(loginEditEmail.text.toString(), loginEditPassword.text.toString())
 
-
+            }
+            loginTxtRegister.setOnClickListener {
+                goToRegisterScreen()
             }
         }
 
@@ -62,6 +63,10 @@ class LoginActivity : AppCompatActivity(), Login.View {
     private val watcher = TxtWatcher {
         binding.loginBtnEnter.isEnabled = binding.loginEditEmail.text.toString().isNotEmpty()
                 && binding.loginEditPassword.text.toString().isNotEmpty()
+    }
+
+    private fun goToRegisterScreen(){
+        startActivity(Intent(this,RegisterActivity::class.java))
     }
 
     override fun showProgress(enabled: Boolean) {
@@ -78,11 +83,11 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun onUserAuthenticated() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
-        finish()
     }
 
-    override fun onUserUnauthorized(message : String) {
+    override fun onUserUnauthorized(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
