@@ -1,4 +1,4 @@
-package com.marcelodonato.instagram.login.view
+package com.marcelodonato.instagram.common.view
 
 import android.content.Context
 import android.util.AttributeSet
