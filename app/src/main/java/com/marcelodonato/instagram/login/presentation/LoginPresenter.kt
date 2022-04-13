@@ -7,6 +7,7 @@ import com.marcelodonato.instagram.login.Login
 import com.marcelodonato.instagram.login.data.LoginCallback
 import com.marcelodonato.instagram.login.data.LoginRepository
 
+
 class LoginPresenter(
     private var view: Login.View?,
     private val repository: LoginRepository
@@ -20,16 +21,15 @@ class LoginPresenter(
             view?.displayEmailFailure(R.string.invalid_email)
         } else {
             view?.displayEmailFailure(null)
-
         }
+
         if (!isPasswordValid) {
             view?.displayPasswordFailure(R.string.invalid_password)
-
         } else {
             view?.displayPasswordFailure(null)
         }
 
-        if(isEmailValid && isPasswordValid){
+        if (isEmailValid && isPasswordValid) {
             view?.showProgress(true)
 
             repository.login(email, password, object : LoginCallback {
@@ -44,7 +44,6 @@ class LoginPresenter(
                 override fun onComplete() {
                     view?.showProgress(false)
                 }
-
             })
         }
     }

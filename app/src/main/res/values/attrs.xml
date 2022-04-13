@@ -2,9 +2,7 @@
 <resources>
 
     <declare-styleable name="LoadingButton">
-        <attr name="text" format="string"></attr>
+        <attr name="text" format="string" />
     </declare-styleable>
-
-
 
 </resources>

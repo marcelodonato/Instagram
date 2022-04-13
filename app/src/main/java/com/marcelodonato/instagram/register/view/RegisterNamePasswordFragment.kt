@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+
+import com.marcelodonato.instagram.register.RegisterNameAndPassword
+
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.common.base.DependencyInjector
 import com.marcelodonato.instagram.common.util.TxtWatcher
 import com.marcelodonato.instagram.databinding.FragmentRegisterNamePasswordBinding
-import com.marcelodonato.instagram.register.RegisterNameAndPassword
 import com.marcelodonato.instagram.register.presentation.RegisterNameAndPasswordPresenter
 import java.lang.IllegalArgumentException
 
-
 class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_password),
     RegisterNameAndPassword.View {
+
     private var binding: FragmentRegisterNamePasswordBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
 

@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/home_img_user"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_insta_profile_thin"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         app:civ_border_color="@color/gray_border"
         app:civ_border_width="1dp"
         app:civ_circle_background_color="@color/gray_border"
@@ -28,10 +28,10 @@
         app:layout_constraintTop_toTopOf="@id/home_img_user" />
 
     <ImageView
+        android:src="@drawable/ic_more"
+        android:layout_marginEnd="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_more"
         app:layout_constraintBottom_toBottomOf="@id/home_img_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/home_img_user" />
@@ -39,9 +39,9 @@
     <ImageView
         android:id="@+id/home_img_post"
         android:layout_width="0dp"
-        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
+        android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +51,9 @@
     <LinearLayout
         android:id="@+id/home_container_user_comment"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:padding="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_img_post">
@@ -69,17 +69,16 @@
         <ImageView
             style="@style/Theme.Instagram.Icon"
             android:src="@drawable/ic_insta_send" />
-
     </LinearLayout>
 
     <TextView
         android:id="@+id/home_txt_caption"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:maxLines="3"
-        android:padding="8dp"
+        android:paddingHorizontal="8dp"
         android:text="@string/agree_terms_policy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_container_user_comment" />

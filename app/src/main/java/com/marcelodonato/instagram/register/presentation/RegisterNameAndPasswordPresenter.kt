@@ -5,11 +5,11 @@ import com.marcelodonato.instagram.register.RegisterNameAndPassword
 import com.marcelodonato.instagram.register.data.RegisterCallback
 import com.marcelodonato.instagram.register.data.RegisterRepository
 
+
 class RegisterNameAndPasswordPresenter(
     private var view: RegisterNameAndPassword.View?,
     private val repository: RegisterRepository
 ) : RegisterNameAndPassword.Presenter {
-
 
     override fun create(email: String, name: String, password: String, confirm: String) {
         val isNameValid = name.length > 3

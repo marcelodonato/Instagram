@@ -1,26 +1,29 @@
 package com.marcelodonato.instagram.register.view
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import com.marcelodonato.instagram.register.RegisterPhoto
 import com.marcelodonato.instagram.R
+import com.marcelodonato.instagram.common.base.DependencyInjector
 import com.marcelodonato.instagram.common.view.CropperImageFragment
 import com.marcelodonato.instagram.common.view.CustomDialog
 import com.marcelodonato.instagram.databinding.FragmentRegisterPhotoBinding
+import com.marcelodonato.instagram.register.presentation.RegisterPhotoPresenter
 
-class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
+class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), RegisterPhoto.View {
 
     private var binding: FragmentRegisterPhotoBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
+
+    override lateinit var presenter: RegisterPhoto.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +39,22 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
 
         binding = FragmentRegisterPhotoBinding.bind(view)
 
-        binding?.let { it ->
+        val repository = DependencyInjector.registerEmailRepository()
+        presenter = RegisterPhotoPresenter(this, repository)
+
+        binding?.let {
             with(it) {
                 registerBtnJump.setOnClickListener {
                     fragmentAttachListener?.goToMainScreen()
                 }
+
                 registerBtnNext.isEnabled = true
                 registerBtnNext.setOnClickListener {
                     openDialog()
                 }
             }
         }
+
     }
 
     override fun onAttach(context: Context) {
@@ -54,6 +62,18 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
         if (context is FragmentAttachListener) {
             fragmentAttachListener = context
         }
+    }
+
+    override fun showProgress(enabled: Boolean) {
+        binding?.registerBtnNext?.showProgress(enabled)
+    }
+
+    override fun onUpdateFailure(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUpdateSuccess() {
+        fragmentAttachListener?.goToMainScreen()
     }
 
     private fun openDialog() {
@@ -65,11 +85,9 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
                 }
                 R.string.gallery -> {
                     fragmentAttachListener?.goToGalleryScreen()
-
                 }
             }
         }
-
         customDialog.show()
     }
 
@@ -82,12 +100,15 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
             }
             binding?.registerImgProfile?.setImageBitmap(bitmap)
+
+            presenter.updateUser(uri)
         }
     }
 
-
     override fun onDestroy() {
         binding = null
+        presenter.onDestroy()
         super.onDestroy()
     }
+
 }

@@ -6,6 +6,7 @@ import com.marcelodonato.instagram.register.RegisterEmail
 import com.marcelodonato.instagram.register.data.RegisterCallback
 import com.marcelodonato.instagram.register.data.RegisterRepository
 
+
 class RegisterEmailPresenter(
     private var view: RegisterEmail.View?,
     private val repository: RegisterRepository
@@ -18,9 +19,7 @@ class RegisterEmailPresenter(
             view?.displayEmailFailure(R.string.invalid_email)
         } else {
             view?.displayEmailFailure(null)
-
         }
-
 
         if (isEmailValid) {
             view?.showProgress(true)
@@ -37,7 +36,6 @@ class RegisterEmailPresenter(
                 override fun onComplete() {
                     view?.showProgress(false)
                 }
-
             })
         }
     }

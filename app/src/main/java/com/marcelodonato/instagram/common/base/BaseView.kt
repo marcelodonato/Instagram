@@ -1,6 +1,5 @@
 package com.marcelodonato.instagram.common.base
 
 interface BaseView<T> {
-
-    var presenter: T
+  var presenter: T
 }

@@ -12,59 +12,56 @@ import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.databinding.FragmentImageCropperBinding
 import java.io.File
 
+
 class CropperImageFragment : Fragment(R.layout.fragment_image_cropper) {
 
-    private var binding: FragmentImageCropperBinding? = null
+  private var binding: FragmentImageCropperBinding? = null
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentImageCropperBinding.bind(view)
+    binding = FragmentImageCropperBinding.bind(view)
 
-        val uri = arguments?.getParcelable<Uri>(KEY_URI)
+    val uri = arguments?.getParcelable<Uri>(KEY_URI)
 
-        binding?.let {
-            with(it) {
-                cropperContainer.setAspectRatio(1, 1)
-                cropperContainer.setFixedAspectRatio(true)
+    binding?.let {
+      with(it) {
+        cropperContainer.setAspectRatio(1, 1)
+        cropperContainer.setFixedAspectRatio(true)
 
-                cropperContainer.setImageUriAsync(uri)
+        cropperContainer.setImageUriAsync(uri)
 
-                cropperBtCancel.setOnClickListener {
-                    parentFragmentManager.popBackStack()
-                }
-
-                cropperContainer.setOnCropImageCompleteListener{ view, result ->
-                    Log.i("Teste", "Nova imagem ${result.uri}")
-
-                    setFragmentResult("cropKey", bundleOf(KEY_URI to result.uri))
-
-
-                    parentFragmentManager.popBackStack()
-                }
-
-
-                cropperBtSave.setOnClickListener {
-                    val dir = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                    if(dir != null){
-                        val uriToSaved = Uri.fromFile(File(dir.parent, System.currentTimeMillis().toString() + ".jpeg"))
-                    cropperContainer.saveCroppedImageAsync(uriToSaved)
-                    }
-                }
-            }
+        cropperBtnCancel.setOnClickListener {
+          parentFragmentManager.popBackStack()
         }
 
-    }
+        cropperContainer.setOnCropImageCompleteListener { view, result ->
+          Log.i("Teste", "nova imagem ${result.uri}")
 
-    override fun onDestroy() {
-        binding = null
-        super.onDestroy()
-    }
+          setFragmentResult("cropKey", bundleOf(KEY_URI to result.uri))
 
-    companion object {
-        const val KEY_URI = "key_uri"
-    }
+          parentFragmentManager.popBackStack()
+        }
 
+        cropperBtnSave.setOnClickListener {
+          val dir = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+          if (dir != null) {
+            val uriToSaved = Uri.fromFile(File(dir.path, System.currentTimeMillis().toString() + ".jpeg"))
+            cropperContainer.saveCroppedImageAsync(uriToSaved)
+          }
+        }
+      }
+    }
+  }
+
+  override fun onDestroy() {
+    binding = null
+    super.onDestroy()
+  }
+
+  companion object {
+    const val KEY_URI = "key_uri"
+  }
 
 }

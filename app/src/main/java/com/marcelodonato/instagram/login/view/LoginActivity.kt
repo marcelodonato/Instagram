@@ -12,16 +12,19 @@ import com.marcelodonato.instagram.login.presentation.LoginPresenter
 import com.marcelodonato.instagram.main.view.MainActivity
 import com.marcelodonato.instagram.register.view.RegisterActivity
 
+
 class LoginActivity : AppCompatActivity(), Login.View {
 
     private lateinit var binding: ActivityLoginBinding
+
     override lateinit var presenter: Login.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
@@ -30,6 +33,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
             loginEditEmail.addTextChangedListener(TxtWatcher {
                 displayEmailFailure(null)
             })
+
             loginEditPassword.addTextChangedListener(watcher)
             loginEditPassword.addTextChangedListener(TxtWatcher {
                 displayPasswordFailure(null)
@@ -37,13 +41,12 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
             loginBtnEnter.setOnClickListener {
                 presenter.login(loginEditEmail.text.toString(), loginEditPassword.text.toString())
-
             }
+
             loginTxtRegister.setOnClickListener {
                 goToRegisterScreen()
             }
         }
-
     }
 
     override fun onDestroy() {
@@ -79,6 +82,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
     }
 
     override fun onUserUnauthorized(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+
 }
