@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcelodonato.instagram.R
 
 
-class FragmentHome : Fragment() {
+class HomeFragment : Fragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_home, container, false)
