@@ -3,6 +3,8 @@ package com.marcelodonato.instagram.common.base
 
 import com.marcelodonato.instagram.login.data.FakeDataSource
 import com.marcelodonato.instagram.login.data.LoginRepository
+import com.marcelodonato.instagram.profile.data.ProfileFakeRemoteDataSource
+import com.marcelodonato.instagram.profile.data.ProfileRepository
 import com.marcelodonato.instagram.register.data.FakeRegisterDataSource
 import com.marcelodonato.instagram.register.data.RegisterRepository
 import com.marcelodonato.instagram.splash.data.FakeLocalDataSource
@@ -20,6 +22,10 @@ object DependencyInjector {
 
   fun registerEmailRepository() : RegisterRepository {
     return RegisterRepository(FakeRegisterDataSource())
+  }
+
+  fun profileRepository() : ProfileRepository{
+    return ProfileRepository(ProfileFakeRemoteDataSource())
   }
 
 }

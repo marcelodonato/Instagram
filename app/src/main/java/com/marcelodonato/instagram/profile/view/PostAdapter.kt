@@ -11,7 +11,7 @@ import com.marcelodonato.instagram.common.model.Post
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    var items : List<Post> = mutableListOf()
+    var items: List<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder(
@@ -25,7 +25,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return items.size
     }
 
 
@@ -34,6 +34,5 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
             itemView.findViewById<ImageView>(R.id.item_profile_img_grid).setImageURI(image)
         }
     }
-
 
 }

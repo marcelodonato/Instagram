@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.common.base.BaseFragment
+import com.marcelodonato.instagram.common.base.DependencyInjector
 import com.marcelodonato.instagram.common.model.Post
 import com.marcelodonato.instagram.common.model.UserAuth
 import com.marcelodonato.instagram.databinding.FragmentProfileBinding
 import com.marcelodonato.instagram.profile.Profile
+import com.marcelodonato.instagram.profile.presentation.ProfilePresenter
 
 
 class ProfileFragment :
@@ -25,7 +27,8 @@ class ProfileFragment :
     private val adapter = PostAdapter()
 
     override fun setupPresenter() {
-        //  TODO:presenter = ProfilePresenter(this, repository)
+        val repository = DependencyInjector.profileRepository()
+        presenter = ProfilePresenter(this, repository)
     }
 
     override fun setupView() {

@@ -6,8 +6,11 @@ object Database {
 
   val usersAuth = hashSetOf<UserAuth>()
   val photos = hashSetOf<Photo>()
+  val posts = hashMapOf<String, Set<Post>>()
 
   var sessionAuth: UserAuth? = null
+
+
 
   init {
     usersAuth.add(UserAuth(UUID.randomUUID().toString(), "UserA", "userA@gmail.com", "12345678"))
