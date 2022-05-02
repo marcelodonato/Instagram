@@ -39,7 +39,7 @@ class ProfileFragment :
     }
 
     override fun showProgress(enabled: Boolean) {
-        binding?.profileProgress?.visibility = if(enabled) View.VISIBLE else View.GONE
+        binding?.profileProgress?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
     override fun displayUserProfile(userAuth: UserAuth) {
@@ -52,7 +52,7 @@ class ProfileFragment :
     }
 
     override fun displayRequestFailure(message: String) {
-        Toast.makeText(requireContext(),message,Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun displayEmptyPosts() {

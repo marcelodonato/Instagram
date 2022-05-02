@@ -10,10 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.camera.view.CameraFragment
-import com.marcelodonato.instagram.common.extension.replaceFragment
 import com.marcelodonato.instagram.databinding.ActivityMainBinding
 import com.marcelodonato.instagram.home.view.HomeFragment
 import com.marcelodonato.instagram.profile.view.ProfileFragment
@@ -23,7 +21,6 @@ import com.marcelodonato.instagram.search.view.SearchFragment
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var homeFragment: Fragment
     private lateinit var searchFragment: Fragment
     private lateinit var profileFragment: Fragment
@@ -35,8 +32,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.setSystemBarsAppearance(
                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
@@ -44,7 +39,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             )
             window.statusBarColor = ContextCompat.getColor(this, R.color.gray)
         }
-
 
         setSupportActionBar(binding.mainToolbar)
 
@@ -93,25 +87,29 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.menu_bottom_home -> {
                 if (currentFragment == homeFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(homeFragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment).show(homeFragment)
+                    .commit()
                 currentFragment = homeFragment
 
             }
             R.id.menu_bottom_search -> {
                 if (currentFragment == searchFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(searchFragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment).show(searchFragment)
+                    .commit()
                 currentFragment = searchFragment
 
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(profileFragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment)
+                    .show(profileFragment).commit()
                 currentFragment = profileFragment
                 scrollToolbarEnabled = true
             }
             R.id.menu_bottom_add -> {
                 if (currentFragment == cameraFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(cameraFragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment).show(cameraFragment)
+                    .commit()
                 currentFragment = cameraFragment
 
             }
@@ -122,7 +120,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 //        currentFragment?.let {
 //            replaceFragment(R.id.main_fragment, it)
 //        }
-
         return true
     }
 }

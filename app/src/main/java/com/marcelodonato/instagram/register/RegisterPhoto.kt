@@ -6,16 +6,16 @@ import com.marcelodonato.instagram.common.base.BaseView
 
 interface RegisterPhoto {
 
-  interface Presenter : BasePresenter {
-    fun updateUser(photoUri: Uri)
-  }
+    interface Presenter : BasePresenter {
+        fun updateUser(photoUri: Uri)
+    }
 
-  interface View: BaseView<Presenter> {
-    fun showProgress(enabled: Boolean)
+    interface View : BaseView<Presenter> {
+        fun showProgress(enabled: Boolean)
 
-    fun onUpdateFailure(message: String)
+        fun onUpdateFailure(message: String)
 
-    fun onUpdateSuccess()
-  }
+        fun onUpdateSuccess()
+    }
 
 }

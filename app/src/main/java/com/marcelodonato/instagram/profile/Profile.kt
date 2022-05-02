@@ -13,10 +13,10 @@ interface Profile {
     }
 
     interface View : BaseView<Presenter> {
-        fun showProgress(enabled : Boolean)
+        fun showProgress(enabled: Boolean)
         fun displayUserProfile(userAuth: UserAuth)
-        fun displayRequestFailure(message : String)
+        fun displayRequestFailure(message: String)
         fun displayEmptyPosts()
-        fun displayFullPosts(posts : List<Post>)
+        fun displayFullPosts(posts: List<Post>)
     }
 }

@@ -6,13 +6,13 @@ import com.marcelodonato.instagram.common.base.BaseView
 
 interface Splash {
 
-  interface Presenter : BasePresenter {
-    fun authenticated()
-  }
+    interface Presenter : BasePresenter {
+        fun authenticated()
+    }
 
-  interface View : BaseView<Presenter> {
-    fun goToMainScreen()
-    fun goToLoginScreen()
-  }
+    interface View : BaseView<Presenter> {
+        fun goToMainScreen()
+        fun goToLoginScreen()
+    }
 
 }

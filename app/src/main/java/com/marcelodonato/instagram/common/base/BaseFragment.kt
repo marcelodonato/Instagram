@@ -17,7 +17,6 @@ abstract class BaseFragment<T, P : BasePresenter>(
 ) : Fragment(layoutId) {
 
     protected var binding: T? = null
-
     abstract var presenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +44,10 @@ abstract class BaseFragment<T, P : BasePresenter>(
         super.onViewCreated(view, savedInstanceState)
 
         binding = bind(view)
-
         setupView()
     }
 
     abstract fun setupView()
-
     abstract fun setupPresenter()
 
     @MenuRes
