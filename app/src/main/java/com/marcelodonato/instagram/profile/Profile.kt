@@ -7,6 +7,7 @@ import com.marcelodonato.instagram.common.model.UserAuth
 
 interface Profile {
 
+
     interface Presenter : BasePresenter {
         fun fetchUserProfile()
         fun fetchUserPosts()

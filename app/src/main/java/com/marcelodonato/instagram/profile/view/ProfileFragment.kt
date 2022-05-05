@@ -1,11 +1,8 @@
 package com.marcelodonato.instagram.profile.view
 
-import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.common.base.BaseFragment
 import com.marcelodonato.instagram.common.base.DependencyInjector
@@ -15,15 +12,12 @@ import com.marcelodonato.instagram.databinding.FragmentProfileBinding
 import com.marcelodonato.instagram.profile.Profile
 import com.marcelodonato.instagram.profile.presentation.ProfilePresenter
 
-
-class ProfileFragment :
-    BaseFragment<FragmentProfileBinding, Profile.Presenter>(
-        R.layout.fragment_profile,
-        FragmentProfileBinding::bind
-    ), Profile.View {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
+    R.layout.fragment_profile,
+    FragmentProfileBinding::bind
+), Profile.View {
 
     override lateinit var presenter: Profile.Presenter
-
     private val adapter = PostAdapter()
 
     override fun setupPresenter() {
@@ -70,6 +64,5 @@ class ProfileFragment :
     override fun getMenu(): Int {
         return R.menu.menu_profile
     }
-
 
 }
