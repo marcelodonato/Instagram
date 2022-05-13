@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marcelodonato.instagram.R
-import com.marcelodonato.instagram.camera.view.CameraFragment
+import com.marcelodonato.instagram.add.view.AddFragment
+import com.marcelodonato.instagram.add.view.CameraFragment
 import com.marcelodonato.instagram.common.extension.replaceFragment
 import com.marcelodonato.instagram.databinding.ActivityMainBinding
 import com.marcelodonato.instagram.home.view.HomeFragment
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeFragment: Fragment
     private lateinit var searchFragment: Fragment
-    private lateinit var cameraFragment: Fragment
+    private lateinit var addFragment: Fragment
     private lateinit var profileFragment: Fragment
     private var currentFragment: Fragment? = null
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         homeFragment = HomeFragment()
         searchFragment = SearchFragment()
-        cameraFragment = CameraFragment()
+        addFragment = AddFragment()
         profileFragment = ProfileFragment()
 
         binding.mainBottomNav.setOnNavigationItemSelectedListener(this)
@@ -83,8 +84,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 currentFragment = searchFragment
             }
             R.id.menu_bottom_add -> {
-                if (currentFragment == cameraFragment) return false
-                currentFragment = cameraFragment
+                if (currentFragment == addFragment) return false
+                currentFragment = addFragment
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false

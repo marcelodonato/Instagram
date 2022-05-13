@@ -5,7 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.marcelodonato.instagram.R
 
-class CameraFragment : Fragment() {
+class GalleryFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
