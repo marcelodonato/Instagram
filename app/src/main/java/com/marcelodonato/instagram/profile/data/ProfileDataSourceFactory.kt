@@ -1,11 +1,13 @@
 package com.marcelodonato.instagram.profile.data
 
+import com.marcelodonato.instagram.common.base.Cache
 import com.marcelodonato.instagram.common.model.Post
 import com.marcelodonato.instagram.common.model.UserAuth
 
+
 class ProfileDataSourceFactory(
-    private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>,
+    private val profileCache: Cache<UserAuth>,
+    private val postsCache: Cache<List<Post>>,
 ) {
 
     fun createLocalDataSource(): ProfileDataSource {

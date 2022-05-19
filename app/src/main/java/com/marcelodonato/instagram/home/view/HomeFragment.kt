@@ -22,7 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
 
     private val adapter = FeedAdapter()
 
-    override fun setupView() {
+    override fun setupViews() {
         binding?.homeRv?.layoutManager = LinearLayoutManager(requireContext())
         binding?.homeRv?.adapter = adapter
 

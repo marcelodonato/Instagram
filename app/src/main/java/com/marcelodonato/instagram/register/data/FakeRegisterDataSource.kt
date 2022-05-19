@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import com.marcelodonato.instagram.common.model.Database
-import com.marcelodonato.instagram.common.model.Photo
 import com.marcelodonato.instagram.common.model.UserAuth
 import java.util.*
 
@@ -33,12 +32,17 @@ class FakeRegisterDataSource : RegisterDataSource {
             if (userAuth != null) {
                 callback.onFailure("Usuário já cadastrado")
             } else {
-                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password)
+                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password, null)
 
                 val created = Database.usersAuth.add(newUser)
 
                 if (created) {
                     Database.sessionAuth = newUser
+
+                    Database.followers[newUser.uuid] = hashSetOf()
+                    Database.posts[newUser.uuid] = hashSetOf()
+                    Database.feeds[newUser.uuid] = hashSetOf()
+
                     callback.onSuccess()
                 } else {
                     callback.onFailure("Erro interno no servidor.")
@@ -57,15 +61,11 @@ class FakeRegisterDataSource : RegisterDataSource {
             if (userAuth == null) {
                 callback.onFailure("Usuário não encontrado")
             } else {
-                val newPhoto = Photo(userAuth.uuid, photoUri)
+                val index = Database.usersAuth.indexOf(Database.sessionAuth)
+                Database.usersAuth[index] = Database.sessionAuth!!.copy(photoUri = photoUri)
+                Database.sessionAuth = Database.usersAuth[index]
 
-                val created = Database.photos.add(newPhoto)
-
-                if (created) {
-                    callback.onSuccess()
-                } else {
-                    callback.onFailure("Erro interno no servidor.")
-                }
+                callback.onSuccess()
 
             }
             callback.onComplete()

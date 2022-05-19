@@ -18,6 +18,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 ), Profile.View {
 
     override lateinit var presenter: Profile.Presenter
+
     private val adapter = PostAdapter()
 
     override fun setupPresenter() {
@@ -25,7 +26,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         presenter = ProfilePresenter(this, repository)
     }
 
-    override fun setupView() {
+    override fun setupViews() {
         binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.profileRv?.adapter = adapter
 
@@ -42,6 +43,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileTxtFollowersCount?.text = userAuth.followersCount.toString()
         binding?.profileTxtUsername?.text = userAuth.name
         binding?.profileTxtBio?.text = "TODO"
+        binding?.profileImgIcon?.setImageURI(userAuth.photoUri)
+
         presenter.fetchUserPosts()
     }
 

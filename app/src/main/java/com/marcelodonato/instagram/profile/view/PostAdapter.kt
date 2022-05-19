@@ -15,8 +15,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_profile_grid, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_profile_grid, parent, false)
         )
     }
 
@@ -28,11 +27,11 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         return items.size
     }
 
-
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(image: Uri) {
             itemView.findViewById<ImageView>(R.id.item_profile_img_grid).setImageURI(image)
         }
     }
+
 
 }

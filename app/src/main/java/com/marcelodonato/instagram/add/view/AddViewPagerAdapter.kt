@@ -13,10 +13,11 @@ class AddViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     override fun getItemCount() = tabs.size
 
     override fun createFragment(position: Int): Fragment {
-        return when(tabs[position]){
+        return when (tabs[position]) {
             R.string.photo -> CameraFragment()
             R.string.gallery -> GalleryFragment()
             else -> throw IllegalArgumentException("Fragment not found")
         }
     }
+
 }

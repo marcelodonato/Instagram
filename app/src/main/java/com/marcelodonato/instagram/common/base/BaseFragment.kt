@@ -10,18 +10,18 @@ import androidx.fragment.app.Fragment
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.databinding.FragmentProfileBinding
 
-
 abstract class BaseFragment<T, P : BasePresenter>(
-    @LayoutRes layoutId: Int,
+    @LayoutRes  layoutId: Int,
     val bind: (View) -> T
 ) : Fragment(layoutId) {
 
     protected var binding: T? = null
+
     abstract var presenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getMenu()?.let {
+        if (getMenu() != null) {
             setHasOptionsMenu(true)
         }
         setupPresenter()
@@ -44,10 +44,14 @@ abstract class BaseFragment<T, P : BasePresenter>(
         super.onViewCreated(view, savedInstanceState)
 
         binding = bind(view)
-        setupView()
+
+        if (savedInstanceState == null) {
+            setupViews()
+        }
     }
 
-    abstract fun setupView()
+    abstract fun setupViews()
+
     abstract fun setupPresenter()
 
     @MenuRes

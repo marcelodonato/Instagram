@@ -14,4 +14,5 @@ class GalleryFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
+
 }

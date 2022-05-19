@@ -7,10 +7,10 @@ import com.marcelodonato.instagram.common.model.UserAuth
 
 interface Profile {
 
-
     interface Presenter : BasePresenter {
         fun fetchUserProfile()
         fun fetchUserPosts()
+        fun clear()
     }
 
     interface View : BaseView<Presenter> {
@@ -20,4 +20,5 @@ interface Profile {
         fun displayEmptyPosts()
         fun displayFullPosts(posts: List<Post>)
     }
+
 }

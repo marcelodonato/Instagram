@@ -15,6 +15,10 @@ class ProfilePresenter(
 ) : Profile.Presenter {
 
 
+    override fun clear() {
+        repository.clearCache()
+    }
+
     override fun fetchUserProfile() {
         view?.showProgress(true)
         repository.fetchUserProfile(object : RequestCallback<UserAuth> {
@@ -32,7 +36,7 @@ class ProfilePresenter(
     }
 
     override fun fetchUserPosts() {
-        repository.fetchUserPosts( object : RequestCallback<List<Post>> {
+        repository.fetchUserPosts(object : RequestCallback<List<Post>> {
             override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
                     view?.displayEmptyPosts()

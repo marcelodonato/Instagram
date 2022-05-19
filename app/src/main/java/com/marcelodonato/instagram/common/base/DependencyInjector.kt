@@ -1,6 +1,9 @@
 package com.marcelodonato.instagram.common.base
 
 
+import com.marcelodonato.instagram.add.data.AddFakeRemoteDataSource
+import com.marcelodonato.instagram.add.data.AddLocalDataSource
+import com.marcelodonato.instagram.add.data.AddRepository
 import com.marcelodonato.instagram.home.data.FeedMemoryCache
 import com.marcelodonato.instagram.home.data.HomeDataSourceFactory
 import com.marcelodonato.instagram.home.data.HomeRepository
@@ -27,13 +30,15 @@ object DependencyInjector {
     }
 
     fun profileRepository(): ProfileRepository {
-        return ProfileRepository(
-            ProfileDataSourceFactory(ProfileMemoryCache, PostListMemoryCache)
-        )
+        return ProfileRepository(ProfileDataSourceFactory(ProfileMemoryCache, PostListMemoryCache))
     }
 
     fun homeRepository(): HomeRepository {
         return HomeRepository(HomeDataSourceFactory(FeedMemoryCache))
+    }
+
+    fun addRepository(): AddRepository {
+        return AddRepository(AddFakeRemoteDataSource(), AddLocalDataSource())
     }
 
 }

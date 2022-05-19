@@ -13,7 +13,7 @@ interface HomeDataSource {
         throw UnsupportedOperationException()
     }
 
-    fun putFeed(response: List<Post>) {
+    fun putFeed(response: List<Post>?) {
         throw UnsupportedOperationException()
     }
 }

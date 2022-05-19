@@ -13,6 +13,7 @@
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/drawable/ic_instagram_2016_5.xml" value="0.2518518518518518" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/drawable/ic_more.xml" value="0.22314814814814815" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/drawable/top_botton_border.xml" value="0.2898148148148148" />
+        <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/activity_add.xml" value="0.3605128205128205" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/activity_register.xml" value="0.28425925925925927" />
@@ -20,7 +21,7 @@
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/button_loading.xml" value="0.35648148148148145" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/dialog_custom.xml" value="0.3605128205128205" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_add.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_camera.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_camera.xml" value="0.25" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_gallery.xml" value="0.3111111111111111" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_home.xml" value="0.27037037037037037" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/layout/fragment_image_cropper.xml" value="0.32037037037037036" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/menu/menu_profile.xml" value="0.27037037037037037" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/menu/menu_profile_bottom_nav.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/menu/menu_profile_botton_nav.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/Marcelo/AndroidStudioProjects/Instagram/app/src/main/res/menu/menu_share.xml" value="0.3605128205128205" />
       </map>
     </option>
   </component>

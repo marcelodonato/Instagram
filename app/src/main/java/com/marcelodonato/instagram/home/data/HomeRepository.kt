@@ -6,6 +6,11 @@ import com.marcelodonato.instagram.common.model.UserAuth
 
 class HomeRepository(private val dataSourceFactory: HomeDataSourceFactory) {
 
+    fun clearCache() {
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        localDataSource.putFeed(null)
+    }
+
 
     fun fetchFeed(callback: RequestCallback<List<Post>>) {
         val localDataSource = dataSourceFactory.createLocalDataSource()

@@ -7,6 +7,7 @@ import com.marcelodonato.instagram.common.model.Database
 import com.marcelodonato.instagram.common.model.Post
 import com.marcelodonato.instagram.common.model.UserAuth
 
+
 class ProfileFakeRemoteDataSource : ProfileDataSource {
 
     override fun fetchUserProfile(userUUID: String, callback: RequestCallback<UserAuth>) {
