@@ -11,8 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marcelodonato.instagram.R
-import com.marcelodonato.instagram.add.view.AddFragment
-import com.marcelodonato.instagram.add.view.CameraFragment
+import com.marcelodonato.instagram.post.view.AddFragment
 import com.marcelodonato.instagram.common.extension.replaceFragment
 import com.marcelodonato.instagram.databinding.ActivityMainBinding
 import com.marcelodonato.instagram.home.view.HomeFragment

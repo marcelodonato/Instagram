@@ -1,4 +1,4 @@
-package com.marcelodonato.instagram.add.view
+package com.marcelodonato.instagram.post.view
 
 import android.net.Uri
 import android.os.Bundle

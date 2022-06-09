@@ -1,4 +1,4 @@
-package com.marcelodonato.instagram.add.view
+package com.marcelodonato.instagram.post.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
