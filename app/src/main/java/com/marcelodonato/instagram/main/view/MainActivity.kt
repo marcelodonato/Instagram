@@ -18,7 +18,8 @@ import com.marcelodonato.instagram.home.view.HomeFragment
 import com.marcelodonato.instagram.profile.view.ProfileFragment
 import com.marcelodonato.instagram.search.view.SearchFragment
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+    AddFragment.AddListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_add -> {
                 if (currentFragment == addFragment) return false
                 currentFragment = addFragment
+                scrollToolbarEnabled = false
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false
@@ -104,7 +106,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onPostCreated() {
         homeFragment.presenter.clear()
 
-        if(supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
             profileFragment.presenter.clear()
 
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home

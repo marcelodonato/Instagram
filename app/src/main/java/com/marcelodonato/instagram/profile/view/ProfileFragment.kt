@@ -3,6 +3,9 @@ package com.marcelodonato.instagram.profile.view
 import android.view.*
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marcelodonato.instagram.R
 import com.marcelodonato.instagram.common.base.BaseFragment
 import com.marcelodonato.instagram.common.base.DependencyInjector
@@ -15,7 +18,7 @@ import com.marcelodonato.instagram.profile.presentation.ProfilePresenter
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     R.layout.fragment_profile,
     FragmentProfileBinding::bind
-), Profile.View {
+), Profile.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     override lateinit var presenter: Profile.Presenter
 
@@ -29,6 +32,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     override fun setupViews() {
         binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.profileRv?.adapter = adapter
+        binding?.profileNavTabs?.setOnNavigationItemSelectedListener(this)
 
         presenter.fetchUserProfile()
     }
@@ -68,4 +72,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         return R.menu.menu_profile
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_profile_grid -> {
+                binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
+            }
+            R.id.menu_profile_list ->{
+                binding?.profileRv?.layoutManager =LinearLayoutManager(requireContext())
+            }
+        }
+        return true
+    }
 }

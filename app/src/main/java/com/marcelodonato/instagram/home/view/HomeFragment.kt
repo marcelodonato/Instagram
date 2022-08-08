@@ -1,6 +1,5 @@
 package com.marcelodonato.instagram.home.view
 
-import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +10,6 @@ import com.marcelodonato.instagram.common.model.Post
 import com.marcelodonato.instagram.databinding.FragmentHomeBinding
 import com.marcelodonato.instagram.home.Home
 import com.marcelodonato.instagram.home.presentation.HomePresenter
-
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
     R.layout.fragment_home,
