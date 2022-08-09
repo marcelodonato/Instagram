@@ -15,6 +15,9 @@ import com.marcelodonato.instagram.post.data.PostRepository
 import com.marcelodonato.instagram.profile.data.*
 import com.marcelodonato.instagram.register.data.FakeRegisterDataSource
 import com.marcelodonato.instagram.register.data.RegisterRepository
+import com.marcelodonato.instagram.search.data.SearchDataSource
+import com.marcelodonato.instagram.search.data.SearchFakeRemoteDataSource
+import com.marcelodonato.instagram.search.data.SearchRepository
 import com.marcelodonato.instagram.splash.data.FakeLocalDataSource
 import com.marcelodonato.instagram.splash.data.SplashRepository
 
@@ -35,6 +38,10 @@ object DependencyInjector {
 
     fun profileRepository(): ProfileRepository {
         return ProfileRepository(ProfileDataSourceFactory(ProfileMemoryCache, PostListMemoryCache))
+    }
+
+    fun searchRepository(): SearchRepository {
+        return SearchRepository(SearchFakeRemoteDataSource())
     }
 
     fun homeRepository(): HomeRepository {

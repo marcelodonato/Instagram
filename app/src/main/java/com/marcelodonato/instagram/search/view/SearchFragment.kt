@@ -1,66 +1,80 @@
 package com.marcelodonato.instagram.search.view
 
-import android.os.Bundle
+import android.app.SearchManager
+import android.content.Context
 import android.view.*
-import android.widget.ImageView
-import androidx.fragment.app.Fragment
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.marcelodonato.instagram.R
+import com.marcelodonato.instagram.common.base.BaseFragment
+import com.marcelodonato.instagram.common.base.DependencyInjector
+import com.marcelodonato.instagram.common.model.UserAuth
+import com.marcelodonato.instagram.databinding.FragmentSearchBinding
+import com.marcelodonato.instagram.search.Search
+import com.marcelodonato.instagram.search.presentation.SearchPresenter
+import com.marcelodonato.instagram.search.view.adapter.SearchAdapter
+
+class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
+    R.layout.fragment_search, FragmentSearchBinding::bind
+), Search.View {
+
+    override lateinit var presenter: Search.Presenter
+    private val adapter = SearchAdapter()
 
 
-class SearchFragment : Fragment() {
+    override fun setupViews() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        binding?.searchRv?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.searchRv?.adapter = adapter
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val rv = view.findViewById<RecyclerView>(R.id.search_rv)
-        rv.layoutManager = LinearLayoutManager(requireContext())
-        rv.adapter = PostAdapter()
+    override fun setupPresenter() {
+        val repository = DependencyInjector.searchRepository()
+        presenter = SearchPresenter(this, repository)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    override fun getMenu() = R.menu.menu_search
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_profile, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = (menu.findItem(R.id.menu_search).actionView as SearchView)
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText?.isNotEmpty() == true) {
+                        presenter.fetchUser(newText)
+                        return true
+                    }
+                    return false
+                }
+            })
+        }
     }
 
-    private class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+    override fun showProgress(enabled: Boolean) {
+        binding?.searchProgress?.visibility = if (enabled) View.VISIBLE else View.GONE
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-            return PostViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_user_list, parent, false)
-            )
-        }
-
-        override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-            holder.bind(R.drawable.ic_insta_add)
-        }
-
-        override fun getItemCount(): Int {
-            return 30
-        }
-
-
-        private class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            fun bind(image: Int) {
-                itemView.findViewById<ImageView>(R.id.search_img_user).setImageResource(image)
-            }
-        }
-
+    override fun displayFullUsers(users: List<UserAuth>) {
+        binding?.searchTxtEmpty?.visibility = GONE
+        binding?.searchRv?.visibility = VISIBLE
+        adapter.items = users
+        adapter.notifyDataSetChanged()
 
     }
 
+    override fun displayEmptyUsers() {
+        binding?.searchTxtEmpty?.visibility = VISIBLE
+        binding?.searchRv?.visibility = GONE
+    }
 }

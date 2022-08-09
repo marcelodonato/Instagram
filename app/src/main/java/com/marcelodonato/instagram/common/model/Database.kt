@@ -1,6 +1,7 @@
 package com.marcelodonato.instagram.common.model
 
 import android.net.Uri
+import com.marcelodonato.instagram.common.model.Database.usersAuth
 import java.io.File
 import java.util.*
 
@@ -40,42 +41,16 @@ object Database {
         posts[userB.uuid] = hashSetOf()
         feeds[userB.uuid] = hashSetOf()
 
-        feeds[userA.uuid]?.addAll(
-            arrayListOf(
-                Post(
+        for (i in 0..30) {
+            val user =
+                UserAuth(
                     UUID.randomUUID().toString(),
-                    Uri.fromFile(File("/storage/emulated/0/Android/media/com.marcelodonato.instagram/Instagram/2022-33-19-02-33-53-470.jpg")),
-                    "desc",
-                    System.currentTimeMillis(),
-                    userA
-                ),
-                Post(
-                    UUID.randomUUID().toString(),
-                    Uri.fromFile(File("/storage/emulated/0/Android/media/com.marcelodonato.instagram/Instagram/2022-33-19-02-33-53-470.jpg")),
-                    "desc",
-                    System.currentTimeMillis(),
-                    userA
-                ),
-                Post(
-                    UUID.randomUUID().toString(),
-                    Uri.fromFile(File("/storage/emulated/0/Android/media/com.marcelodonato.instagram/Instagram/2022-33-19-02-33-53-470.jpg")),
-                    "desc",
-                    System.currentTimeMillis(),
-                    userA
-                ),
-                Post(
-                    UUID.randomUUID().toString(),
-                    Uri.fromFile(File("/storage/emulated/0/Android/media/com.marcelodonato.instagram/Instagram/2022-33-19-02-33-53-470.jpg")),
-                    "desc",
-                    System.currentTimeMillis(),
-                    userA
-                ),
-
+                    "user$i",
+                    "user$i@gmail.com",
+                    "123123123",
+                    null
                 )
-        )
-
-        feeds[userA.uuid]?.toList()?.let {
-            feeds[userB.uuid]?.addAll(it)
+            usersAuth.add(user)
         }
 
         sessionAuth = usersAuth.first()
